@@ -7,7 +7,7 @@ private int age;
 private String drivingLicenceNumber;
 private long aadharCardNumber;
 public Customer(String name, int age, String drivingLicenceNumber, long aadharCardNumber) {
-	super();
+	
 	this.name = name;
 	this.age = age;
 	this.drivingLicenceNumber = drivingLicenceNumber;

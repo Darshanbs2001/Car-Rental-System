@@ -30,7 +30,11 @@ public String getFuelType() {
 public double getMileage() {
 	return mileage;
 }
-public Car(String company, String model, int plateNumber, boolean available, String fuelType, double mileage,double costPerKiloMeter) {
+public Car getCar() {
+	return this;
+}
+public Car(String company, String model, int plateNumber, boolean available, String fuelType, 
+		double mileage,double costPerKiloMeter) {
 	
 	this.company = company;
 	this.model = model;
