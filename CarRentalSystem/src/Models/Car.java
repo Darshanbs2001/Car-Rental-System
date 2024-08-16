@@ -8,8 +8,12 @@ private int plateNumber;
 private boolean available;
 private String fuelType;
 private double mileage;
+private double costPerKiloMeter;
 public String getCompany() {
 	return company;
+}
+public double costPerKiloMeter() {
+	return this.costPerKiloMeter;
 }
 public String getModel() {
 	return model;
@@ -26,7 +30,7 @@ public String getFuelType() {
 public double getMileage() {
 	return mileage;
 }
-public Car(String company, String model, int plateNumber, boolean available, String fuelType, double mileage) {
+public Car(String company, String model, int plateNumber, boolean available, String fuelType, double mileage,double costPerKiloMeter) {
 	
 	this.company = company;
 	this.model = model;
@@ -34,6 +38,7 @@ public Car(String company, String model, int plateNumber, boolean available, Str
 	this.available = available;
 	this.fuelType = fuelType;
 	this.mileage = mileage;
+	this.costPerKiloMeter=costPerKiloMeter;
 }
 
 
