@@ -1,6 +1,9 @@
 package MainServices;
 import Models.Customer;
+import Models.Rides;
 import LocalDB.CustomerDb;
+
+import java.util.Date;
 import java.util.Scanner;
 public class CustomerServices {
 	CustomerDb customerdb=new CustomerDb();
@@ -25,6 +28,43 @@ public void createCustomer() {
 public CustomerDb getCusDb() {
 	return customerdb;
 }
-
-
+public void returnTheCar(BookingServices bs,CarServices cs) {
+	Scanner in=new Scanner(System.in);
+	// TODO Auto-generated method stub
+    System.out.println("Entered the DL number");
+    String dlnumber=in.nextLine();
+    System.out.println("Enter the car plate number");
+    String plateNumber=in.nextLine();
+    
+    Rides r=bs.findValidRide(dlnumber,plateNumber);
+    
+    int numberOfDays=0;
+    if(r!=null) {
+    	System.out.println("The car is valid and ready to be returned");
+    	if(r.getEndDate().compareTo(new Date())>0) {
+    		System.out.println("Addition charges are levied because of the extra days");
+    	    
+    	   System.out.println(numberOfDays);
+    	   if(numberOfDays>0) {
+    		   r.fine(numberOfDays);
+    	   }
+    	   
+    	}
+    	System.out.println("Enter the meter reading from the car");
+        int reading=in.nextInt();
+        
+     	r.setendReading(reading,r.getCar().getcostPerKiloMeter());
+     	System.out.println("The Final Cost of the ride is: "+r.getMoney()+"Rs");
+     	
+     	cs.addToCarsDb(r.getCar());
+ 		r.setStatus();
+    }
+    else {
+    		System.out.println("The Ride details are not correct");
+    	}
+    
+    }
 }
+
+
+

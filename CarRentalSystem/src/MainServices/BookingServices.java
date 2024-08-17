@@ -24,7 +24,7 @@ public class BookingServices {
 		String from,to;
 		int startReading;
 		Scanner in=new Scanner(System.in);		
-		System.out.println("Enter the Rented Dated ");
+		System.out.println("Enter the Ride start date ");
 		fd=new Date(in.nextLine());
 		System.out.println("Enter the Estimate Ride completion date");
 		td=new Date(in.nextLine());
@@ -32,21 +32,17 @@ public class BookingServices {
 		from=in.nextLine();
 		System.out.println("Enter the to city location ");
 		to=in.nextLine();
-	    ca=cars.findOne();
-	    startReading=ca.getMeterReading();
-	    while(cu==null) {
+	  
+	    
 	    System.out.println("Enter the DLNumber of the customer");
 	    String DLNumber=in.nextLine();
 	    cu=customers.findCustomer(DLNumber);
 	    if(cu==null) {
-	    	System.out.println("Press 1 if you want to create new customer");
-	    	int choice=in.nextInt();
-	        if(choice==1) {
-	        	cus.createCustomer();
-	        }
+	     System.out.println("Customer Details is not found please create a new customer");
+	     return;
 	    }
-	    
-	    }
+	    ca=cars.findOne();
+	    startReading=ca.getMeterReading();
 	    Ledger.add(new Rides(fd,td,from,to,ca,cu,startReading));
 	}
 	public void  ViewHistoryOfCustomer() {
@@ -72,7 +68,16 @@ public class BookingServices {
 				}
 			}
 		}
-		
+		 
+	}
+	public Rides findValidRide(String DlNumber,String plateNumber) {
+		// TODO Auto-generated method stub
+		for(Rides r:Ledger) {
+			if(r.getCustomer().getDrivingLicenceNumber().equalsIgnoreCase(DlNumber)&&r.getCar().getPlateNumber().equalsIgnoreCase(plateNumber)) {
+				return r;
+			}
+		}
+		return null;
 	}
 
 }

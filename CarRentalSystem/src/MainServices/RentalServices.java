@@ -16,9 +16,10 @@ public static void main(String args[]) {
 		System.out.println("1.Add a new Car");
 		System.out.println("2.Add new Customer");
 		System.out.println("3.Rent a Car or book a ride");
-		System.out.println("4.View History of the rides of a perticular customer");
-		System.out.println("5.View History of the rides of a perticular car");
-		System.out.println("6.Exit");
+		System.out.println("4.Return the car");
+		System.out.println("5.View History of the rides of a perticular customer");
+		System.out.println("6.View History of the rides of a perticular car");
+		System.out.println("7.Exit");
 		choice=in.nextInt();
 		switch(choice) {
 		
@@ -28,9 +29,11 @@ public static void main(String args[]) {
 		       break;
 		case 3:bs.createAndSaveRide(cas.getCarsDb(), cus.getCusDb());
 		       break;
-		case 4:bs.ViewHistoryOfCustomer();
+		case 4:cus.returnTheCar(bs,cas);
 		       break;
-		case 6:System.exit(0);
+		case 5:bs.ViewHistoryOfCustomer();
+		       break;
+		case 7:System.exit(0);
 		       break;
 		default:System.out.println("invalid choice");
 		}

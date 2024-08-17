@@ -13,7 +13,7 @@ private double costPerKiloMeter;
 public String getCompany() {
 	return company;
 }
-public double costPerKiloMeter() {
+public double getcostPerKiloMeter() {
 	return this.costPerKiloMeter;
 }
 public int getMeterReading() {
@@ -37,6 +37,7 @@ public double getMileage() {
 public Car getCar() {
 	return this;
 }
+
 public Car(String company, String model, String plateNumber, boolean available, String fuelType, 
 		double mileage,double costPerKiloMeter,Long MeterReading) {
 	

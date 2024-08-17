@@ -29,7 +29,11 @@ public void createCar() {
 	 carsdb.addToCarsDb( new Car(company,model,plateNumber,available,fuelType,mileage,costPerKilometer,MeterReading));
 
 }	
+public void addToCarsDb(Car c) {
+	carsdb.addToCarsDb(c);
+}
 public CarsDb getCarsDb() {
 	return carsdb;
 }
+
 }
