@@ -1,13 +1,14 @@
 package Models;
-
+import java.util.ArrayList;
 public class Customer {
 private String name;
-
+private Long phoneno;
 private int age;
 private String drivingLicenceNumber;
 private long aadharCardNumber;
-public Customer(String name, int age, String drivingLicenceNumber, long aadharCardNumber) {
-	
+ArrayList<Rides> history;
+public Customer(String name, int age, String drivingLicenceNumber, long aadharCardNumber,long phoneno) {
+	this.phoneno=phoneno;
 	this.name = name;
 	this.age = age;
 	this.drivingLicenceNumber = drivingLicenceNumber;
@@ -25,5 +26,7 @@ public String getDrivingLicenceNumber() {
 public long aadharCardNumber() {
 	return aadharCardNumber;
 }
-
+public long phoneno() {
+	return phoneno;
+}
 }

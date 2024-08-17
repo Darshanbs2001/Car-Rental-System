@@ -7,9 +7,13 @@ private String fromLocation;
 private String toLocation;
 private Car ca;
 private Customer cu;
+private int startReading;
+private int endReading;
 private int estimatedRideDistance;
+private boolean completed=false; 
+private int earned;
 public Rides(Date startDate, Date endDate, String fromLocation, String toLocation, 
-		int estimatedRideDistance,Car ca,Customer cu) {
+		Car ca,Customer cu,int startReading) {
 
 	this.startDate = startDate;
 	EndDate = endDate;
@@ -17,10 +21,22 @@ public Rides(Date startDate, Date endDate, String fromLocation, String toLocatio
 	this.toLocation = toLocation;
 	this.ca=ca;
 	this.cu=cu;
-	this.estimatedRideDistance = estimatedRideDistance;
+	
+	this.startReading=startReading;
 }
 public Car getCar() {
 	return ca;
+}
+public void setendReading(int reading,int price) {
+	this.endReading=reading;
+	this.estimatedRideDistance=this.endReading-this.startReading;
+	this.earned=this.estimatedRideDistance*price;
+}
+public boolean getStatus() {
+	return this.completed;
+}
+public int getMoney() {
+	return earned;
 }
 public Customer getCustomer() {
 	return cu;
