@@ -27,7 +27,7 @@ public void createCar() {
     System.out.println("Enter the initial meter reading of the car");
     MeterReading =in.nextLong();
 	 carsdb.addToCarsDb( new Car(company,model,plateNumber,available,fuelType,mileage,costPerKilometer,MeterReading));
-
+   
 }	
 public void addToCarsDb(Car c) {
 	carsdb.addToCarsDb(c);

@@ -39,11 +39,13 @@ public class BookingServices {
 	    cu=customers.findCustomer(DLNumber);
 	    if(cu==null) {
 	     System.out.println("Customer Details is not found please create a new customer");
+	    
 	     return;
 	    }
 	    ca=cars.findOne();
 	    startReading=ca.getMeterReading();
 	    Ledger.add(new Rides(fd,td,from,to,ca,cu,startReading));
+	    
 	}
 	public void  ViewHistoryOfCustomer() {
 		// TODO Auto-generated method stub

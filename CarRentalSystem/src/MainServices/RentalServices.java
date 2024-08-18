@@ -7,11 +7,9 @@ public static void main(String args[]) {
 	CarServices cas=new CarServices();
 	CustomerServices cus=new CustomerServices();
 	BookingServices bs=new BookingServices(cus,cas);
-	
+	Scanner in =new Scanner(System.in);
 	int choice;
-	
 	while(true) {
-		Scanner in =new Scanner(System.in);
 		System.out.println("Please select from the following ");
 		System.out.println("1.Add a new Car");
 		System.out.println("2.Add new Customer");
@@ -22,7 +20,6 @@ public static void main(String args[]) {
 		System.out.println("7.Exit");
 		choice=in.nextInt();
 		switch(choice) {
-		
 		case 1:cas.createCar();
 		       break;
 		case 2:cus.createCustomer();

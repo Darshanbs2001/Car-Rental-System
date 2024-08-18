@@ -24,6 +24,7 @@ public void createCustomer() {
 	System.out.println("Enter the phone no: ");
 	phoneno=in.nextLong();
 	customerdb.addToCustomerDb(new Customer(name, age,drivingLicenceNumber,aadharCardNumber,phoneno));
+
 }
 public CustomerDb getCusDb() {
 	return customerdb;
@@ -38,17 +39,12 @@ public void returnTheCar(BookingServices bs,CarServices cs) {
     
     Rides r=bs.findValidRide(dlnumber,plateNumber);
     
-    int numberOfDays=0;
+    int numberOfDays=r.getEndDate().getDate()-new Date().getDate();
     if(r!=null) {
     	System.out.println("The car is valid and ready to be returned");
-    	if(r.getEndDate().compareTo(new Date())>0) {
+    	if(numberOfDays>0) {
     		System.out.println("Addition charges are levied because of the extra days");
-    	    
-    	   System.out.println(numberOfDays);
-    	   if(numberOfDays>0) {
-    		   r.fine(numberOfDays);
-    	   }
-    	   
+    	    r.fine(numberOfDays);
     	}
     	System.out.println("Enter the meter reading from the car");
         int reading=in.nextInt();
@@ -62,7 +58,8 @@ public void returnTheCar(BookingServices bs,CarServices cs) {
     else {
     		System.out.println("The Ride details are not correct");
     	}
-    
+
+
     }
 }
 
