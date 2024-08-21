@@ -1,18 +1,21 @@
 package MainServices;
-
+import ErrorChecking.forBooking;
 import Models.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import ErrorChecking.forCustormers;
 import LocalDB.CustomerDb;
 import LocalDB.CarsDb;
 import java.util.Date;
 public class BookingServices {
 	private CustomerServices cus;
 	private CarServices cas;
+	private forBooking fb=new forBooking();
+	private forCustormers fc=new forCustormers();
     public BookingServices(CustomerServices cus,CarServices cas) {
     	this.cus=cus;
     	this.cas=cas;
+    	
     }
     ArrayList<Rides> Ledger=new ArrayList<Rides>();
 	@SuppressWarnings("deprecation")
@@ -21,21 +24,27 @@ public class BookingServices {
 		Date fd,td;
 		Car ca;
 		Customer cu=null;
-		String from,to;
+		String from,to,dat1;
 		int startReading;
 		Scanner in=new Scanner(System.in);		
 		System.out.println("Enter the Ride start date ");
-		fd=new Date(in.nextLine());
+		dat1=in.nextLine();
+		dat1=fb.checkDate(dat1);
+		fd=new Date(dat1);
 		System.out.println("Enter the Estimate Ride completion date");
-		td=new Date(in.nextLine());
+		dat1=in.nextLine();
+		td=fb.checktoDate(dat1,fd);
 		System.out.println("Enter the from city location");
 		from=in.nextLine();
+		from=fb.checkCityName(from);
 		System.out.println("Enter the to city location ");
 		to=in.nextLine();
+		to=fb.checkCityName(to);
 	  
 	    
 	    System.out.println("Enter the DLNumber of the customer");
 	    String DLNumber=in.nextLine();
+	    DLNumber=fc.checkDrivingLicenceNumber(DLNumber);
 	    cu=customers.findCustomer(DLNumber);
 	    if(cu==null) {
 	     System.out.println("Customer Details is not found please create a new customer");
@@ -52,6 +61,7 @@ public class BookingServices {
 		Scanner in=new Scanner(System.in);
 		System.out.println("Enter the DLnumber of the customer");
 	       String DLnumber=in.nextLine();
+	       DLnumber=fc.checkDrivingLicenceNumber(DLnumber);
 	       Customer c=cus.getCusDb().findCustomer(DLnumber);
 		for(Rides r:Ledger) {
 			if(r.getCustomer().equals(c)) {
@@ -81,5 +91,33 @@ public class BookingServices {
 		}
 		return null;
 	}
+    public void printCarHistory() {
+    	Scanner in=new Scanner(System.in);
+    	System.out.println("Enter the dlnumber of the car");
+	       String  dlnumber=in.nextLine();
+	       dlnumber=fc.checkDrivingLicenceNumber(dlnumber);
+	       System.out.println("_________________________________________________________________________________________");
+	       System.out.println(" COMPANY\t|Model\t|From\t|To\t|Customert\t|Status\t|Earned\t|Ride Distance\t");
+    	for(Rides r:Ledger) {
+    		if(r.getCar().getPlateNumber().equals(dlnumber)) {
+    			System.out.print("|"+r.getCar().getCompany()+"\t"+r.getCar().getModel()+"\t"+r.getFromLocation()+"\t"+r.getToLocation()+"\t|"+r.getCustomer().getName()+"\t|");
+    			
+    			if(r.getStatus())
+    			{
+    				System.out.print("Completed"+"\t|"+r.getMoney()+"\t|"+r.getEstimatedRideDistance());
+    				
+    				
+    			    
+    			}
+    			else {
+    				System.out.print("Pending");
+    			}
+    			System.out.print(" \n");
+    			
+    			System.out.println("--------------------------------------------------------------------------------------");
+    		}
+    		
+    	}
+    }
 
 }
